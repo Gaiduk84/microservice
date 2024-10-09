@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Добавить/Изменить пользователя</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #f2f2f2; margin: 0; padding: 0; }
+    .container { max-width: 600px; margin: 20px auto; background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+    h2 { text-align: center; color: #333; }
+    label { display: block; margin-bottom: 5px; color: #666; }
+    input { width: calc(100% - 20px); padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px; }
+    button { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background-color: #45a049; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Добавить/Изменить пользователя</h2>
+  <div th:include="menuPage">Меню</div>
+  <form th:action="${action}" method="post" th:object="${user}">
+    <input type="hidden" name="id" th:value="${user.id}">
+    <label for="username">Логин:</label>
+    <input type="text" name="username" id="username" th:value="${user.username}">
+    <label for="password">Пароль:</label>
+    <input type="password" name="password" id="password" th:value="${user.password}">
+    <label for="email">Почтовый ящик:</label>
+    <input type="email" name="email" id="email" th:value="${user.email}">
+    <label for="firstName">Имя:</label>
+    <input type="text" name="firstName" id="firstName" th:value="${user.firstName}">
+    <label for="lastName">Фамилия:</label>
+    <input type="text" name="lastName" id="lastName" th:value="${user.lastName}">
+    <label for="roleAdmin">Администратор:</label>
+    <input type="checkbox" name="roles" id="roleAdmin" value="ADMIN" th:checked="${user.roles.contains('ADMIN')}">
+    <label for="roleVIP">VIP:</label>
+    <input type="checkbox" name="roles" id="roleVIP" value="VIP" th:checked="${user.roles.contains('VIP')}">
+    <button type="submit">Сохранить</button>
+  </form>
+</div>
+</body>
+</html>

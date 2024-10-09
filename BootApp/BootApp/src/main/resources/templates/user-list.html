@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #dacece;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #e3f4ff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 3px solid #8cf363;
+        }
+        th {
+            background-color: #ca8181;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .actions {
+            white-space: nowrap;
+        }
+        .actions a {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div th:switch="${users}">
+        <h2 th:case="null">No users found!</h2>
+        <div th:case="*">
+            <h2>Users</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>First name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th class="actions">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.firstname}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.password}"></td>
+                    <td class="actions">
+                        <a th:href="@{/user-update/{id}(id=${user.id})}">Edit</a>
+                        <a th:href="@{/user-delete/{id}(id=${user.id})}">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <p><a href="/user-create">Create user</a></p>
+    </div>
+</div>
+</body>
+</html>
